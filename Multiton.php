@@ -36,9 +36,9 @@ trait Multiton
         $name = $name ?: 'default';
         $static = get_called_class();
         $key = sprintf('%s::%s', $static, $name);
-        $ref = new \ReflectionClass($static);
         if(!array_key_exists($key, static::$instances))
         {
+            $ref = new \ReflectionClass($static);
             $ctor = is_callable($ref, '__construct');
             static::$instances[$key] = (!!count($args) && $ctor)
                 ? $ref->newInstanceArgs($args)
